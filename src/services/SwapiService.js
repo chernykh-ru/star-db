@@ -46,3 +46,29 @@ export default class SwapiService {
 }
 
 // export const swapi = new SwapiService();
+
+// const getResource = async (url, id) => {
+//   const res = await fetch(`${url}+${id}/`);
+
+//   if (!res.ok) {
+//     throw new Error(`Could not fetch ${url}${id}, received ${res.status}`);
+//   }//проверка был ли ответ успешным (статус в диапазоне 200–299)
+
+//   const data = await res.json();
+//   console.log(data);
+//   return data;
+// }; //синтаксис async/await
+
+// const getResource = (url, id) => {
+//   fetch(`${url} + ${id}/`)
+//     .then((res) => {
+//       console.log(res.status);
+//       return res.json();
+//     })
+//     .then((data) => {
+//       setState(({ people }) => {
+//         return { ...state, people: [...people, data] };
+//       });
+//       console.log(data);
+//     });
+// };//синтаксис then
