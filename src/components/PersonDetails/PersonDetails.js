@@ -1,7 +1,7 @@
 import React from 'react';
 import './PersonDetails.css';
 
-function PersonDetails() {
+const PersonDetails = () => {
   return (
     <div className='person-details card'>
       <img className='person-image' src='https://via.placeholder.com/150' alt='placeholder'></img>
@@ -23,7 +23,7 @@ function PersonDetails() {
         </ul>
       </div>
     </div>
-  );
-}
+  ); 
+};
 
 export default PersonDetails;

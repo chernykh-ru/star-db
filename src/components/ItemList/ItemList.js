@@ -7,10 +7,10 @@ function ItemList({ people }) {
       <h2>ItemList</h2>
       <ul className='item-list list-group'>
         {people.map((item) => {
-          const { name, mass } = item;
+          const { name, gender, ...props } = item;
           return (
             <li className='list-group-item' key={name}>
-              <p>{`My name is ${name}, my mass ${mass}`}</p>
+              <p>{`My name is ${name}, my gender ${gender}`}</p>
             </li>
           );
         })}

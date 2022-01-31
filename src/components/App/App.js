@@ -11,19 +11,20 @@ const swapi = new SwapiService();
 function App() {
   const [state, setState] = useState({
     people: [],
-    starships: [],
-    planets: [{}],
+    // starships: [],
+    // planets: [{}],
   });
 
   const { people, starships } = state;
   console.log('people', people);
-  console.log('starships', starships);
+  // console.log('starships', starships);
 
   useEffect(() => {
     swapi
       .getAllPeople()
       .then((data) =>
         setState(({ people }) => {
+          console.log(data);
           return { ...state, people: [...data] };
           // return { ...state, people: [...people, ...data] };
         }),
@@ -31,9 +32,9 @@ function App() {
       .catch((err) => {
         console.error('Could not fetch', err);
       });
-    swapi.getPerson(3).then((p) => {
-      console.log(p.name);
-    });
+    // swapi.getPerson(3).then((p) => {
+    //   // console.log(p.name);
+    // });
   }, []);
 
   return (
