@@ -21,7 +21,11 @@ const PeoplePage = () => {
   return (
     <div className='row mb2 page'>
       <div className='col md-6'>
-        <ItemList onItemSelected={onPersonSelected} getData={swapi.getAllPeople} />
+        <ItemList
+          onItemSelected={onPersonSelected}
+          getData={swapi.getAllPeople}
+          renderItem={({ name, gender, birthYear }) => `${name} (${gender} ${birthYear})`}
+        />
       </div>
       <div className='col md-6'>
         {selectedPerson && <PersonDetails personId={selectedPerson} />}

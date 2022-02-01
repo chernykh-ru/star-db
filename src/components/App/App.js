@@ -41,7 +41,10 @@ function App() {
 
       <div className='row mb2 page'>
         <div className='col md-6'>
-          <ItemList getData={swapi.getAllStarships} />
+          <ItemList
+            getData={swapi.getAllStarships}
+            renderItem={({ name, model, crew }) => `${name} (${model} ${crew})`}
+          />
         </div>
         <div className='col md-6'>
           {selectedPerson && <PersonDetails personId={selectedPerson} />}
@@ -50,7 +53,15 @@ function App() {
 
       <div className='row mb2 page'>
         <div className='col md-6'>
-          <ItemList getData={swapi.getAllPlanets} />
+          <ItemList
+            getData={swapi.getAllPlanets}
+            renderItem={({ name, population, diameter }) => (
+              <span>
+                {name} {population} {diameter}
+                <button className='btn btn-outline-secondary'>!</button>
+              </span>
+            )}
+          />
         </div>
         <div className='col md-6'>
           {selectedPerson && <PersonDetails personId={selectedPerson} />}
