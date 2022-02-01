@@ -3,7 +3,7 @@ import SwapiService from '../../services/SwapiService';
 import ItemList from '../ItemList';
 import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
-import PersonDetails from '../PersonDetails';
+import ItemDetails from '../ItemDetails';
 import './App.css';
 import PeoplePage from '../PeoplePage/PeoplePage';
 import ErrorBoundry from '../ErrorBoundry';

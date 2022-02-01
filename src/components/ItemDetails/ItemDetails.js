@@ -3,22 +3,22 @@ import SwapiService from '../../services/SwapiService';
 import Spinner from '../Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 import ErrorButton from '../ErrorButton';
-import './PersonDetails.css';
+import './ItemDetails.css';
 
 const swapi = new SwapiService();
 
-const PersonDetails = ({ personId }) => {
-  const [state, setState] = useState({ person: {}, loading: true, error: false });
+const ItemDetails = ({ itemId }) => {
+  const [state, setState] = useState({ item: {}, loading: true, error: false });
 
-  const { person, loading, error } = state;
+  const { item, loading, error } = state;
 
   // console.log('person ditails state', state);
   // console.log('person ditails selectedPerson', selectedPerson);
 
-  const onPersonLoaded = (person) => {
+  const onItemLoaded = (item) => {
     // console.log('onPersonLoaded', person);
 
-    setState({ person, loading: false });
+    setState({ item, loading: false });
   };
 
   const onError = (err) => {
@@ -27,26 +27,26 @@ const PersonDetails = ({ personId }) => {
   };
 
   useEffect(() => {
-    swapi.getPerson(personId).then(onPersonLoaded).catch(onError);
-  }, [personId]);
+    swapi.getPerson(itemId).then(onItemLoaded).catch(onError);
+  }, [itemId]);
 
   const hasData = !(loading || error);
 
   return (
-    <div className='person-details card'>
+    <div className='item-details card'>
       {loading && <Spinner />}
       {error && <ErrorIndicator />}
-      {hasData && <PersonView person={person} />}
+      {hasData && <ItemView item={item} />}
     </div>
   );
 };
 
-const PersonView = ({ person }) => {
-  const { id, gender, birthYear, eyeColor, name } = person;
+const ItemView = ({ item }) => {
+  const { id, gender, birthYear, eyeColor, name } = item;
   return (
     <>
       <img
-        className='person-image'
+        className='item-image'
         src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
         alt='placeholder'
       />
@@ -74,4 +74,4 @@ const PersonView = ({ person }) => {
   );
 };
 
-export default PersonDetails;
+export default ItemDetails;

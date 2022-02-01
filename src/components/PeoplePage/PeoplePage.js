@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SwapiService from '../../services/SwapiService';
 import ErrorBoundry from '../ErrorBoundry';
 import ItemList from '../ItemList';
-import PersonDetails from '../PersonDetails';
+import ItemDetails from '../ItemDetails';
 import Row from '../Row';
 import './PeoplePage.css';
 
@@ -28,7 +28,7 @@ const PeoplePage = () => {
   );
 
   const personDetails = (
-    <ErrorBoundry>{selectedPerson && <PersonDetails personId={selectedPerson} />}</ErrorBoundry>
+    <ErrorBoundry>{selectedPerson && <ItemDetails itemId={selectedPerson} />}</ErrorBoundry>
   );
 
   return <Row left={itemList} right={personDetails} />;
