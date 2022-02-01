@@ -6,6 +6,7 @@ import RandomPlanet from '../RandomPlanet';
 import PersonDetails from '../PersonDetails';
 import './App.css';
 import PeoplePage from '../PeoplePage/PeoplePage';
+import ErrorBoundry from '../ErrorBoundry';
 
 const swapi = new SwapiService();
 
@@ -36,10 +37,11 @@ function App() {
       <Header />
       {showRandomPlanet && <RandomPlanet />}
       <ToggleRandomPlanet onToggleRandom={onToggleRandom} />
+      <ErrorBoundry>
+        <PeoplePage />
+      </ErrorBoundry>
 
-      <PeoplePage />
-
-      <div className='row mb2 page'>
+      {/* <div className='row mb2 page'>
         <div className='col md-6'>
           <ItemList
             getData={swapi.getAllStarships}
@@ -49,9 +51,9 @@ function App() {
         <div className='col md-6'>
           {selectedPerson && <PersonDetails personId={selectedPerson} />}
         </div>
-      </div>
+      </div> */}
 
-      <div className='row mb2 page'>
+      {/* <div className='row mb2 page'>
         <div className='col md-6'>
           <ItemList
             getData={swapi.getAllPlanets}
@@ -66,7 +68,7 @@ function App() {
         <div className='col md-6'>
           {selectedPerson && <PersonDetails personId={selectedPerson} />}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

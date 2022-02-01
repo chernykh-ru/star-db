@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './PersonDetails.css';
 import SwapiService from '../../services/SwapiService';
 import Spinner from '../Spinner';
 import ErrorIndicator from '../ErrorIndicator';
+import ErrorButton from '../ErrorButton';
+import './PersonDetails.css';
 
 const swapi = new SwapiService();
 
@@ -65,6 +66,9 @@ const PersonView = ({ person }) => {
             {/* <span>red</span> */}
           </li>
         </ul>
+        <div className='throw-error'>
+          <ErrorButton />
+        </div>
       </div>
     </>
   );

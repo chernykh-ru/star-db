@@ -5,7 +5,7 @@ import './ItemList.css';
 
 // const swapi = new SwapiService();
 
-const ItemList = ({ onItemSelected, getData, renderItem }) => {
+const ItemList = ({ onItemSelected, getData, renderItem, children }) => {
   const [state, setState] = useState({
     itemList: [],
   });
@@ -39,7 +39,8 @@ const ItemList = ({ onItemSelected, getData, renderItem }) => {
       <ul className='item-list list-group'>
         {itemList.map((item) => {
           const { id } = item;
-          const label = renderItem(item);
+          const label = children(item);
+          // const label = renderItem(item);
           return (
             <li className='list-group-item' key={id} onClick={() => onItemSelected(id)}>
               <p>{label}</p>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SwapiService from '../../services/SwapiService';
+import ErrorBoundry from '../ErrorBoundry';
 import ItemList from '../ItemList';
 import PersonDetails from '../PersonDetails';
 import Row from '../Row';
@@ -20,14 +21,15 @@ const PeoplePage = () => {
   };
 
   const itemList = (
-    <ItemList
-      onItemSelected={onPersonSelected}
-      getData={swapi.getAllPeople}
-      renderItem={({ name, gender, birthYear }) => `${name} (${gender} ${birthYear})`}
-    />
+    <ItemList onItemSelected={onPersonSelected} getData={swapi.getAllPeople}>
+      {/* renderItem={({ name, gender, birthYear }) => `${name} (${gender} ${birthYear})`}> */}
+      {(i) => `${i.name} (${i.birthYear})`}
+    </ItemList>
   );
 
-  const personDetails = selectedPerson && <PersonDetails personId={selectedPerson} />;
+  const personDetails = (
+    <ErrorBoundry>{selectedPerson && <PersonDetails personId={selectedPerson} />}</ErrorBoundry>
+  );
 
   return <Row left={itemList} right={personDetails} />;
 };
