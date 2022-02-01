@@ -11,11 +11,15 @@
 }
 
 .header ul li:hover {
-  border-color: #444;
+  background-color: #444;
+}
+
+.header a {
+  text-decoration: none;
 }
 
 .header a:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .header h3 a {

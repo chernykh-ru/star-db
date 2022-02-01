@@ -5,7 +5,7 @@ import './ItemList.css';
 
 const swapi = new SwapiService();
 
-function ItemList({ onItemSelected }) {
+const ItemList = ({ onItemSelected }) => {
   const [state, setState] = useState({
     peopleList: [],
   });
@@ -38,7 +38,7 @@ function ItemList({ onItemSelected }) {
 
   return (
     <div>
-      <h2>ItemList</h2>
+      {/* <h2>ItemList</h2> */}
       <ul className='item-list list-group'>
         {peopleList.map((item) => {
           const { name, id } = item;
@@ -49,8 +49,8 @@ function ItemList({ onItemSelected }) {
           );
         })}
       </ul>
-    </div> 
+    </div>
   );
-}
+};
 
 export default ItemList;

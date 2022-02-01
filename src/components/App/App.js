@@ -5,12 +5,13 @@ import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
 import PersonDetails from '../PersonDetails';
 import './App.css';
+import PeoplePage from '../PeoplePage/PeoplePage';
 
 const swapi = new SwapiService();
 
 function App() {
   const [state, setState] = useState({
-    selectedPerson: null,
+    // selectedPerson: null,
     showRandomPlanet: true,
   });
 
@@ -24,29 +25,29 @@ function App() {
     });
     // console.log('toggleRandom', toggleRandom);
   };
-  // const onToggleRandom = () => {
-  //   setToggleRandom((toggleRandom) => !toggleRandom);
-  //   // console.log('toggleRandom', toggleRandom);
-  // };
 
-  const onPersonSelected = (id) => {
-    setState({ ...state, selectedPerson: id });
-    // console.log('person id', id);
-  };
+  // const onPersonSelected = (id) => {
+  //   setState({ ...state, selectedPerson: id });
+  //   // console.log('person id', id);
+  // };
 
   return (
     <div className='container'>
       <Header />
       {showRandomPlanet && <RandomPlanet />}
       <ToggleRandomPlanet onToggleRandom={onToggleRandom} />
-      <div className='row mb2'>
+      {/* <div className='row mb2'>
         <div className='col md-6'>
-          <ItemList onItemSelected={onPersonSelected} />
+          <ItemList />
         </div>
         <div className='col md-6'>
           {selectedPerson && <PersonDetails personId={selectedPerson} />}
         </div>
-      </div>
+      </div> */}
+
+      <PeoplePage />
+      <PeoplePage />
+      <PeoplePage />
     </div>
   );
 }
