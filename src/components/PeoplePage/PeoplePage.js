@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SwapiService from '../../services/SwapiService';
 import ItemList from '../ItemList';
 import PersonDetails from '../PersonDetails';
+import Row from '../Row';
 import './PeoplePage.css';
 
 const swapi = new SwapiService();
@@ -18,20 +19,17 @@ const PeoplePage = () => {
     // console.log('person id', id);
   };
 
-  return (
-    <div className='row mb2 page'>
-      <div className='col md-6'>
-        <ItemList
-          onItemSelected={onPersonSelected}
-          getData={swapi.getAllPeople}
-          renderItem={({ name, gender, birthYear }) => `${name} (${gender} ${birthYear})`}
-        />
-      </div>
-      <div className='col md-6'>
-        {selectedPerson && <PersonDetails personId={selectedPerson} />}
-      </div>
-    </div>
+  const itemList = (
+    <ItemList
+      onItemSelected={onPersonSelected}
+      getData={swapi.getAllPeople}
+      renderItem={({ name, gender, birthYear }) => `${name} (${gender} ${birthYear})`}
+    />
   );
+
+  const personDetails = selectedPerson && <PersonDetails personId={selectedPerson} />;
+
+  return <Row left={itemList} right={personDetails} />;
 };
 
 export default PeoplePage;
