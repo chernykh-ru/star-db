@@ -36,18 +36,26 @@ function App() {
       <Header />
       {showRandomPlanet && <RandomPlanet />}
       <ToggleRandomPlanet onToggleRandom={onToggleRandom} />
-      {/* <div className='row mb2'>
+
+      <PeoplePage />
+
+      <div className='row mb2 page'>
         <div className='col md-6'>
-          <ItemList />
+          <ItemList getData={swapi.getAllStarships} />
         </div>
         <div className='col md-6'>
           {selectedPerson && <PersonDetails personId={selectedPerson} />}
         </div>
-      </div> */}
+      </div>
 
-      <PeoplePage />
-      <PeoplePage />
-      <PeoplePage />
+      <div className='row mb2 page'>
+        <div className='col md-6'>
+          <ItemList getData={swapi.getAllPlanets} />
+        </div>
+        <div className='col md-6'>
+          {selectedPerson && <PersonDetails personId={selectedPerson} />}
+        </div>
+      </div>
     </div>
   );
 }

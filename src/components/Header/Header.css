@@ -12,6 +12,7 @@
 
 .header ul li:hover {
   background-color: #444;
+  transition: 0.2s ease-out;
 }
 
 .header a {
@@ -20,6 +21,7 @@
 
 .header a:hover {
   text-decoration: underline;
+  transition: 0.2s ease-out;
 }
 
 .header h3 a {

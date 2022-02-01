@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import SwapiService from '../../services/SwapiService';
+// import SwapiService from '../../services/SwapiService';
 import Spinner from '../Spinner';
 import './ItemList.css';
 
-const swapi = new SwapiService();
+// const swapi = new SwapiService();
 
-const ItemList = ({ onItemSelected }) => {
+const ItemList = ({ onItemSelected, getData }) => {
   const [state, setState] = useState({
-    peopleList: [],
+    itemList: [],
   });
 
-  const { peopleList } = state;
+  const { itemList } = state;
 
   console.log('state ItemList', state);
 
   useEffect(() => {
-    swapi
-      .getAllPeople()
+    getData()
       .then((data) =>
-        setState(({ peopleList }) => {
-          console.log('data', data);
-          return { ...state, peopleList: [...data] };
+        setState(({ itemList }) => {
+          return { ...state, itemList: [...data] };
           // return { ...state, people: [...people, ...data] };
         }),
       )
@@ -32,7 +30,7 @@ const ItemList = ({ onItemSelected }) => {
     // });
   }, []);
 
-  if (!peopleList) {
+  if (!itemList) {
     return <Spinner />;
   }
 
@@ -40,7 +38,7 @@ const ItemList = ({ onItemSelected }) => {
     <div>
       {/* <h2>ItemList</h2> */}
       <ul className='item-list list-group'>
-        {peopleList.map((item) => {
+        {itemList.map((item) => {
           const { name, id } = item;
           return (
             <li className='list-group-item' key={id} onClick={() => onItemSelected(id)}>

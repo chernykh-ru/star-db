@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-// import SwapiService from '../../services/SwapiService';
+import SwapiService from '../../services/SwapiService';
 import ItemList from '../ItemList';
 import PersonDetails from '../PersonDetails';
 import './PeoplePage.css';
 
-// const swapi = new SwapiService();
+const swapi = new SwapiService();
 
 const PeoplePage = () => {
   const [state, setState] = useState({
@@ -21,7 +21,7 @@ const PeoplePage = () => {
   return (
     <div className='row mb2 page'>
       <div className='col md-6'>
-        <ItemList onItemSelected={onPersonSelected} />
+        <ItemList onItemSelected={onPersonSelected} getData={swapi.getAllPeople} />
       </div>
       <div className='col md-6'>
         {selectedPerson && <PersonDetails personId={selectedPerson} />}
