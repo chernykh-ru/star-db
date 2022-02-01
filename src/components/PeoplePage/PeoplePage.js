@@ -28,7 +28,9 @@ const PeoplePage = () => {
   );
 
   const personDetails = (
-    <ErrorBoundry>{selectedPerson && <ItemDetails itemId={selectedPerson} />}</ErrorBoundry>
+    <ErrorBoundry>
+      {selectedPerson && <ItemDetails itemId={selectedPerson} getData={swapi.getStarship} />}
+    </ErrorBoundry>
   );
 
   return <Row left={itemList} right={personDetails} />;

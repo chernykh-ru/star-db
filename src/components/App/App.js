@@ -3,10 +3,11 @@ import SwapiService from '../../services/SwapiService';
 import ItemList from '../ItemList';
 import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
-import ItemDetails from '../ItemDetails';
+import ItemDetails, { Record } from '../ItemDetails/ItemDetails';
 import './App.css';
 import PeoplePage from '../PeoplePage/PeoplePage';
 import ErrorBoundry from '../ErrorBoundry';
+import Row from '../Row';
 
 const swapi = new SwapiService();
 
@@ -27,48 +28,29 @@ function App() {
     // console.log('toggleRandom', toggleRandom);
   };
 
-  // const onPersonSelected = (id) => {
-  //   setState({ ...state, selectedPerson: id });
-  //   // console.log('person id', id);
-  // };
+  const personDetails = (
+    <ItemDetails itemId={3} getData={swapi.getPerson} getImageUrl={swapi.getPersonImage}>
+      <Record field='gender' label='Gender' />
+      <Record field='eyeColor' label='Eye Color' />
+    </ItemDetails>
+  );
+
+  const starshipDetails = (
+    <ItemDetails itemId={10} getData={swapi.getStarship} getImageUrl={swapi.getStarshipImage}>
+      <Record field='model' label='Model' />
+      <Record field='length' label='Length' />
+    </ItemDetails>
+  );
 
   return (
     <div className='container'>
       <Header />
-      {showRandomPlanet && <RandomPlanet />}
+      {/* {showRandomPlanet && <RandomPlanet />}
       <ToggleRandomPlanet onToggleRandom={onToggleRandom} />
       <ErrorBoundry>
         <PeoplePage />
-      </ErrorBoundry>
-
-      {/* <div className='row mb2 page'>
-        <div className='col md-6'>
-          <ItemList
-            getData={swapi.getAllStarships}
-            renderItem={({ name, model, crew }) => `${name} (${model} ${crew})`}
-          />
-        </div>
-        <div className='col md-6'>
-          {selectedPerson && <PersonDetails personId={selectedPerson} />}
-        </div>
-      </div> */}
-
-      {/* <div className='row mb2 page'>
-        <div className='col md-6'>
-          <ItemList
-            getData={swapi.getAllPlanets}
-            renderItem={({ name, population, diameter }) => (
-              <span>
-                {name} {population} {diameter}
-                <button className='btn btn-outline-secondary'>!</button>
-              </span>
-            )}
-          />
-        </div>
-        <div className='col md-6'>
-          {selectedPerson && <PersonDetails personId={selectedPerson} />}
-        </div>
-      </div> */}
+      </ErrorBoundry> */}
+      <Row left={personDetails} right={starshipDetails} />
     </div>
   );
 }

@@ -1,13 +1,14 @@
 export default class SwapiService {
-  _baseURL = 'https://swapi.dev/api/';
+  _apiBase = 'https://swapi.dev/api/';
+  _imageBase = 'https://starwars-visualguide.com/assets/img/';
 
-  //трансформируем данные с сервера в удобный нам вид
-
+  //достаем регуляркой из строки цифровой блок с id
   _extractId = (item) => {
     const _idRegExp = /\/([0-9]*)\/$/;
     return item.url.match(_idRegExp)[1];
   };
 
+  //трансформируем данные с сервера в удобный нам вид, отсекая лишние данные и переименовывая нужные поля
   _transformPerson = (person) => {
     return {
       id: this._extractId(person),
@@ -43,10 +44,10 @@ export default class SwapiService {
   };
 
   getResource = async (url) => {
-    const res = await fetch(`${this._baseURL}${url}`);
+    const res = await fetch(`${this._apiBase}${url}`);
 
     if (!res.ok) {
-      throw new Error(`Could not fetch ${this._baseURL}${url}, received ${res.status}`);
+      throw new Error(`Could not fetch ${this._apiBase}${url}, received ${res.status}`);
     } //проверка был ли ответ успешным (статус в диапазоне 200–299)
 
     return await res.json();
@@ -70,6 +71,10 @@ export default class SwapiService {
     return this._transformPerson(person);
   };
 
+  getPersonImage = ({ id }) => {
+    return `${this._imageBase}characters/${id}.jpg`;
+  };
+
   getAllStarships = async () => {
     const res = await this.getResource(`starships/`);
     return res.results.map(this._transformStarship);
@@ -80,6 +85,10 @@ export default class SwapiService {
     return this._transformStarship(starship);
   };
 
+  getStarshipImage = ({ id }) => {
+    return `${this._imageBase}starships/${id}.jpg`;
+  };
+
   getAllPlanets = async () => {
     const res = await this.getResource(`planets/`);
     return res.results.map(this._transformPlanet);
@@ -88,5 +97,9 @@ export default class SwapiService {
   getPlanet = async (id) => {
     const planet = await this.getResource(`planets/${id}/`);
     return this._transformPlanet(planet);
+  };
+
+  getPlanetImage = ({ id }) => {
+    return `${this._imageBase}planets/${id}.jpg`;
   };
 }
