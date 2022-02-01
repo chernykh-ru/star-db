@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SwapiService from '../../services/SwapiService';
 import ItemList from '../ItemList';
 import Header from '../Header';
@@ -10,47 +10,55 @@ const swapi = new SwapiService();
 
 function App() {
   const [state, setState] = useState({
-    people: [],
-    // starships: [],
-    // planets: [{}],
+    selectedPerson: null,
+    showRandomPlanet: true,
   });
 
-  const { people, starships } = state;
-  console.log('people', people);
-  // console.log('starships', starships);
+  // console.log('App state', state);
 
-  useEffect(() => {
-    swapi
-      .getAllPeople()
-      .then((data) =>
-        setState(({ people }) => {
-          console.log(data);
-          return { ...state, people: [...data] };
-          // return { ...state, people: [...people, ...data] };
-        }),
-      )
-      .catch((err) => {
-        console.error('Could not fetch', err);
-      });
-    // swapi.getPerson(3).then((p) => {
-    //   // console.log(p.name);
-    // });
-  }, []);
+  const { selectedPerson, showRandomPlanet } = state;
+
+  const onToggleRandom = () => {
+    setState(({ showRandomPlanet }) => {
+      return { ...state, showRandomPlanet: !showRandomPlanet };
+    });
+    // console.log('toggleRandom', toggleRandom);
+  };
+  // const onToggleRandom = () => {
+  //   setToggleRandom((toggleRandom) => !toggleRandom);
+  //   // console.log('toggleRandom', toggleRandom);
+  // };
+
+  const onPersonSelected = (id) => {
+    setState({ ...state, selectedPerson: id });
+    // console.log('person id', id);
+  };
 
   return (
-    <div>
+    <div className='container'>
       <Header />
-      <RandomPlanet />
+      {showRandomPlanet && <RandomPlanet />}
+      <ToggleRandomPlanet onToggleRandom={onToggleRandom} />
       <div className='row mb2'>
         <div className='col md-6'>
-          <ItemList people={people} />
+          <ItemList onItemSelected={onPersonSelected} />
         </div>
         <div className='col md-6'>
-          <PersonDetails />
+          {selectedPerson && <PersonDetails personId={selectedPerson} />}
         </div>
       </div>
     </div>
   );
 }
+
+const ToggleRandomPlanet = ({ onToggleRandom }) => {
+  return (
+    <div>
+      <button className='toggle-planet btn btn-warning btn-lg' onClick={onToggleRandom}>
+        Toggle Random Planet
+      </button>
+    </div>
+  );
+};
 
 export default App;

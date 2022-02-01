@@ -26,9 +26,9 @@ const RandomPlanet = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      const id = Math.floor(Math.random() * 18 + 2);
-      swapi.getPlanet(15000).then(onPlanetLoaded).catch(onError);
-    }, 100000000);
+      const id = Math.floor(Math.random() * 25 + 2);
+      swapi.getPlanet(id).then(onPlanetLoaded).catch(onError);
+    }, 60000);
     return () => {
       clearInterval(intervalId);
     }; //cleanup function
