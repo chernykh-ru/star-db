@@ -11,18 +11,18 @@ import ErrorBoundry from '../ErrorBoundry';
 import Row from '../Row';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
 // import { SwapiServiceProvider } from '../SwapiServiceContext';
-const swapi = new SwapiService();
+// const swapi = new SwapiService();
 // const swapi = new DummySwapiService();
 
 function App() {
   const [state, setState] = useState({
-    // selectedPerson: null,
     showRandomPlanet: true,
+    swapi: new SwapiService(),
   });
 
   // console.log('App state', state);
 
-  const { selectedPerson, showRandomPlanet } = state;
+  const { swapi, showRandomPlanet } = state;
 
   // const {
   //   getPerson,
@@ -41,6 +41,13 @@ function App() {
       return { ...state, showRandomPlanet: !showRandomPlanet };
     });
     // console.log('toggleRandom', toggleRandom);
+  };
+
+  const onChangeService = () => {
+    setState(({ swapi }) => {
+      const Service = swapi instanceof SwapiService ? DummySwapiService : SwapiService;
+      return { ...state, swapi: new Service() };
+    });
   };
 
   // const peopleList = (
@@ -91,7 +98,7 @@ function App() {
 
   return (
     <div className='container'>
-      <Header />
+      <Header onChangeService={onChangeService} />
       {showRandomPlanet && <RandomPlanet />}
       <ToggleRandomPlanet onToggleRandom={onToggleRandom} />
       <SwapiServiceContext.Provider value={swapi}>

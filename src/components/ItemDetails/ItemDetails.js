@@ -39,7 +39,7 @@ const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
   useEffect(() => {
     getData(itemId).then(onItemLoaded).catch(onError);
     // swapi.getPerson(itemId).then(onItemLoaded).catch(onError);
-  }, [itemId]);
+  }, [itemId, getData]);
 
   const hasData = !(loading || error);
 

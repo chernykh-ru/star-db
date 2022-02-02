@@ -28,7 +28,7 @@ const ItemList = ({ onItemSelected, getData, renderItem, children }) => {
     // swapi.getPerson(3).then((p) => {
     //   // console.log(p.name);
     // });
-  }, []);
+  }, [getData]);
 
   if (!itemList) {
     return <Spinner />;
