@@ -3,26 +3,26 @@ import ErrorBoundry from '../ErrorBoundry';
 import ItemList from '../ItemList';
 import ItemDetails from '../ItemDetails';
 import Row from '../Row';
-import './PeoplePage.css';
 import { Record } from '../ItemDetails/ItemDetails';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
+import './StarshipPage.css';
 
-const PeoplePage = () => {
+const StarshipPage = () => {
   const [state, setState] = useState({
-    selectedPerson: null,
+    selectedStarship: null,
   });
 
   const swapi = useContext(SwapiServiceContext);
 
-  const { selectedPerson } = state;
+  const { selectedStarship } = state;
 
-  const onPersonSelected = (id) => {
-    setState({ ...state, selectedPerson: id });
+  const onStarshipSelected = (id) => {
+    setState({ ...state, selectedStarship: id });
     // console.log('person id', id);
   };
 
-  const peopleList = (
-    <ItemList getData={swapi.getAllPeople} onItemSelected={onPersonSelected}>
+  const starshipList = (
+    <ItemList getData={swapi.getAllStarships} onItemSelected={onStarshipSelected}>
       {({ name }) => <span>{name}</span>}
     </ItemList>
   );
@@ -33,22 +33,22 @@ const PeoplePage = () => {
   //   </ItemList>
   // );
 
-  const personDetails = (
+  const starshipDetails = (
     <ErrorBoundry>
-      {selectedPerson && (
+      {selectedStarship && (
         <ItemDetails
-          itemId={selectedPerson}
-          getData={swapi.getPerson}
-          getImageUrl={swapi.getPersonImage}>
-          <Record field='gender' label='Gender' />
-          <Record field='eyeColor' label='Eye Color' />
-          <Record field='birthYear' label='Birth Year' />
+          itemId={selectedStarship}
+          getData={swapi.getStarship}
+          getImageUrl={swapi.getStarshipImage}>
+          <Record field='model' label='Model' />
+          <Record field='length' label='Length' />
+          <Record field='costInCredits' label='Cost' />
         </ItemDetails>
       )}
     </ErrorBoundry>
   );
 
-  return <Row left={peopleList} right={personDetails} />;
+  return <Row left={starshipList} right={starshipDetails} />;
 };
 
-export default PeoplePage;
+export default StarshipPage;

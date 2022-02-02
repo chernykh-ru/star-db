@@ -3,26 +3,26 @@ import ErrorBoundry from '../ErrorBoundry';
 import ItemList from '../ItemList';
 import ItemDetails from '../ItemDetails';
 import Row from '../Row';
-import './PeoplePage.css';
 import { Record } from '../ItemDetails/ItemDetails';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
+import './PlanetPage.css';
 
-const PeoplePage = () => {
+const PlanetPage = () => {
   const [state, setState] = useState({
-    selectedPerson: null,
+    selectedPlanet: null,
   });
 
   const swapi = useContext(SwapiServiceContext);
 
-  const { selectedPerson } = state;
+  const { selectedPlanet } = state;
 
-  const onPersonSelected = (id) => {
-    setState({ ...state, selectedPerson: id });
+  const onPlanetSelected = (id) => {
+    setState({ ...state, selectedPlanet: id });
     // console.log('person id', id);
   };
 
-  const peopleList = (
-    <ItemList getData={swapi.getAllPeople} onItemSelected={onPersonSelected}>
+  const planetList = (
+    <ItemList getData={swapi.getAllPlanets} onItemSelected={onPlanetSelected}>
       {({ name }) => <span>{name}</span>}
     </ItemList>
   );
@@ -33,22 +33,22 @@ const PeoplePage = () => {
   //   </ItemList>
   // );
 
-  const personDetails = (
+  const planetDetails = (
     <ErrorBoundry>
-      {selectedPerson && (
+      {selectedPlanet && (
         <ItemDetails
-          itemId={selectedPerson}
-          getData={swapi.getPerson}
-          getImageUrl={swapi.getPersonImage}>
-          <Record field='gender' label='Gender' />
-          <Record field='eyeColor' label='Eye Color' />
-          <Record field='birthYear' label='Birth Year' />
+          itemId={selectedPlanet}
+          getData={swapi.getPlanet}
+          getImageUrl={swapi.getPlanetImage}>
+          <Record field='population' label='Population' />
+          <Record field='rotationPeriod' label='Rotation Period' />
+          <Record field='diameter' label='Diameter' />
         </ItemDetails>
       )}
     </ErrorBoundry>
   );
 
-  return <Row left={peopleList} right={personDetails} />;
+  return <Row left={planetList} right={planetDetails} />;
 };
 
-export default PeoplePage;
+export default PlanetPage;
