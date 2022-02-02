@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import SwapiService from '../../services/SwapiService';
 import Spinner from '../Spinner';
 import ErrorIndicator from '../ErrorIndicator';
+import PropTypes from 'prop-types';
 import './RandomPlanet.css';
 
 const swapi = new SwapiService();
 
-const RandomPlanet = () => {
+const RandomPlanet = ({ updateInterval = 60000 }) => {
   const [state, setState] = useState({
     planet: {},
     loading: true,
@@ -25,10 +26,10 @@ const RandomPlanet = () => {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    const { intervalId } = setInterval(() => {
       const id = Math.floor(Math.random() * 25 + 2);
       swapi.getPlanet(id).then(onPlanetLoaded).catch(onError);
-    }, 60000);
+    }, updateInterval);
     return () => {
       clearInterval(intervalId);
     }; //cleanup function
@@ -62,6 +63,24 @@ const RandomPlanet = () => {
     </div>
   );
 };
+
+RandomPlanet.propTypes = {
+  updateInterval: PropTypes.number,
+};
+
+// RandomPlanet.propTypes = {
+//   updateInterval: (props, propName, componentName) => {
+//     const value = props[propName];
+
+//     if (typeof value === 'number' && !isNaN(value)) {
+//       return null;
+//     }
+//     return new TypeError(`${componentName}: ${propName} must be number `);
+//   },
+// };
+// RandomPlanet.defaultProps = {
+//   updateInterval: 60000,
+// };
 
 const PlanetView = ({ planet }) => {
   const { id, population, rotationPeriod, diameter, name } = planet;

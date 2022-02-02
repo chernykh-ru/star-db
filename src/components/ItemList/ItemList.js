@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-// import SwapiService from '../../services/SwapiService';
 import Spinner from '../Spinner';
+import PropTypes from 'prop-types';
 import './ItemList.css';
-
-// const swapi = new SwapiService();
 
 const ItemList = ({ onItemSelected, getData, renderItem, children }) => {
   const [state, setState] = useState({
@@ -50,6 +48,12 @@ const ItemList = ({ onItemSelected, getData, renderItem, children }) => {
       </ul>
     </div>
   );
+};
+
+ItemList.propTypes = {
+  onItemSelected: PropTypes.func.isRequired,
+  getData: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired,
 };
 
 export default ItemList;
