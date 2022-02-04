@@ -15,7 +15,23 @@
   transition: 0.2s ease-out;
 }
 
-.header a {
+.nav-link {
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  transition: 0.2s ease-out;
+}
+
+.header-logo .nav-link {
+  color: white;
+}
+
+.header-logo .nav-link:hover {
+  color: #00bc8c;
+}
+/* .header a {
   text-decoration: none;
 }
 
@@ -30,9 +46,10 @@
 
 .header h3 a:hover {
   color: #00bc8c;
-}
+} */
 
 .header button {
   height: 2.2rem;
-  margin-top: 2px;
+  margin-top: 10px;
+  margin-left: 20px;
 }

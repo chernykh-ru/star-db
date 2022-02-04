@@ -8,6 +8,7 @@ import ErrorBoundry from '../ErrorBoundry';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
 import PlanetPage from '../PlanetPage';
 import StarshipPage from '../StarshipPage';
+import { Routes, Route, Outlet, Link } from 'react-router-dom';
 import './App.css';
 // import ItemList from '../ItemList';
 // import ItemDetails, { Record } from '../ItemDetails/ItemDetails';
@@ -43,16 +44,29 @@ function App() {
       {/* {showRandomPlanet && <RandomPlanet />} */}
       {/* <ToggleRandomPlanet onToggleRandom={onToggleRandom} /> */}
       <SwapiServiceContext.Provider value={swapi}>
-        <ErrorBoundry>
-          <PeoplePage />
-        </ErrorBoundry>
-        <ErrorBoundry>
-          <PlanetPage />
-        </ErrorBoundry>
-        <ErrorBoundry>
-          <StarshipPage />
-        </ErrorBoundry>
+        <Routes>
+          <Route exact path='/' element={<h2>Welcome to Star DB</h2>} />
+          <Route path='people' element={<PeoplePage />} />
+          <Route path='planet' element={<PlanetPage />} />
+          <Route path='starship' element={<StarshipPage />} />
+        </Routes>
+        {/* <Link to='/people'>
+          <ErrorBoundry>
+            <PeoplePage />
+          </ErrorBoundry>
+        </Link>
+        <Link to='/planet'>
+          <ErrorBoundry>
+            <PlanetPage />
+          </ErrorBoundry> 
+        </Link>
+        <Link to='/starship'>
+          <ErrorBoundry>
+            <StarshipPage />
+          </ErrorBoundry>
+        </Link> */}
       </SwapiServiceContext.Provider>
+      <Outlet />
     </div>
   );
 }
