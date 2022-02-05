@@ -8,11 +8,12 @@ import ErrorBoundry from '../ErrorBoundry';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
 import PlanetPage from '../PlanetPage';
 import StarshipPage from '../StarshipPage';
-import { Routes, Route, Outlet, Link } from 'react-router-dom';
+import { Routes, Route, Outlet, Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 // import ItemList from '../ItemList';
 // import ItemDetails, { Record } from '../ItemDetails/ItemDetails';
 // import Row from '../Row';
+import StarshipDetails from '../StarshipPage/StarshipDetails';
 
 function App() {
   const [state, setState] = useState({
@@ -20,9 +21,26 @@ function App() {
     swapi: new SwapiService(),
   });
 
+  let { id } = useParams();
+  console.log('params', id);
+
+  let location = useLocation();
+  console.log('location', location);
+
+  // let navigate = useNavigate();
+  // console.log('navigate', navigate);
+
   // console.log('App state', state);
 
   const { swapi } = state;
+
+  // const extractId = () => {
+  //   const _idRegExp = /\/([0-9]*)$/;
+  //   if (location) {
+  //     return location.pathname.match(_idRegExp)[1];
+  //   }
+  // };
+  // console.log(extractId());
 
   // const onToggleRandom = () => {
   //   setState(({ showRandomPlanet }) => {
@@ -46,25 +64,12 @@ function App() {
       <SwapiServiceContext.Provider value={swapi}>
         <Routes>
           <Route exact path='/' element={<h2>Welcome to Star DB</h2>} />
-          <Route path='people' element={<PeoplePage />} />
-          <Route path='planet' element={<PlanetPage />} />
-          <Route path='starship' element={<StarshipPage />} />
+          {/* <Route path='people' element={<PeoplePage />} />
+          <Route path='planet' element={<PlanetPage />} /> */}
+          <Route exact path='starship' element={<StarshipPage />} />
+          <Route path='starship/:id' element={<StarshipDetails selectedStarship={10} />} />
+          {/* <Route path='starship/:id' element={<h2>Hi ships</h2>} /> */}
         </Routes>
-        {/* <Link to='/people'>
-          <ErrorBoundry>
-            <PeoplePage />
-          </ErrorBoundry>
-        </Link>
-        <Link to='/planet'>
-          <ErrorBoundry>
-            <PlanetPage />
-          </ErrorBoundry> 
-        </Link>
-        <Link to='/starship'>
-          <ErrorBoundry>
-            <StarshipPage />
-          </ErrorBoundry>
-        </Link> */}
       </SwapiServiceContext.Provider>
       <Outlet />
     </div>

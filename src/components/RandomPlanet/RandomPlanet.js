@@ -51,7 +51,7 @@ const RandomPlanet = ({ updateInterval = 60000 }) => {
   //     });
   // }, []);
 
-  console.log('randomPlanet state', state);
+  // console.log('randomPlanet state', state);
 
   const hasData = !(loading || error);
 

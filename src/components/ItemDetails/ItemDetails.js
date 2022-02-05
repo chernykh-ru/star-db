@@ -3,6 +3,7 @@ import SwapiService from '../../services/SwapiService';
 import Spinner from '../Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 import ErrorButton from '../ErrorButton';
+
 import './ItemDetails.css';
 
 const swapi = new SwapiService();
@@ -39,7 +40,7 @@ const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
   useEffect(() => {
     getData(itemId).then(onItemLoaded).catch(onError);
     // swapi.getPerson(itemId).then(onItemLoaded).catch(onError);
-  }, [itemId, getData]);
+  }, [itemId]);
 
   const hasData = !(loading || error);
 

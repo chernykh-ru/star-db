@@ -1,54 +1,34 @@
 import React, { useState, useContext } from 'react';
-import ErrorBoundry from '../ErrorBoundry';
 import ItemList from '../ItemList';
-import ItemDetails from '../ItemDetails';
-import Row from '../Row';
-import { Record } from '../ItemDetails/ItemDetails';
+import { useLocation, useParams } from 'react-router-dom';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
 import './StarshipPage.css';
+import StarshipList from './StarshipList';
 
 const StarshipPage = () => {
-  const [state, setState] = useState({
-    selectedStarship: null,
-  });
+  // const [state, setState] = useState({
+  //   selectedStarship: null,
+  // });
 
   const swapi = useContext(SwapiServiceContext);
 
-  const { selectedStarship } = state;
+  // let location = useLocation();
+  // console.log('location', location);
+  let { id } = useParams();
+  console.log('params', id);
 
-  const onStarshipSelected = (id) => {
-    setState({ ...state, selectedStarship: id });
-    // console.log('person id', id);
-  };
+  // const { selectedStarship } = state;
+  const { getAllStarships } = swapi;
 
-  const starshipList = (
-    <ItemList getData={swapi.getAllStarships} onItemSelected={onStarshipSelected}>
-      {({ name }) => <span>{name}</span>}
-    </ItemList>
+  // const onStarshipSelected = (id) => {
+  //   setState({ ...state, selectedStarship: id });
+  //   // console.log('person id', id);
+  // };
+
+  return (
+    <StarshipList getData={getAllStarships} />
+    // <StarshipList getData={getAllStarships} onStarshipSelected={parseInt(params.id, 10)} />
   );
-  // const itemList = (
-  //   <ItemList onItemSelected={onPersonSelected} getData={swapi.getAllPeople}>
-  //     {/* renderItem={({ name, gender, birthYear }) => `${name} (${gender} ${birthYear})`}> */}
-  //     {(i) => `${i.name} (${i.birthYear})`}
-  //   </ItemList>
-  // );
-
-  const starshipDetails = (
-    <ErrorBoundry>
-      {selectedStarship && (
-        <ItemDetails
-          itemId={selectedStarship}
-          getData={swapi.getStarship}
-          getImageUrl={swapi.getStarshipImage}>
-          <Record field='model' label='Model' />
-          <Record field='length' label='Length' />
-          <Record field='costInCredits' label='Cost' />
-        </ItemDetails>
-      )}
-    </ErrorBoundry>
-  );
-
-  return <Row left={starshipList} right={starshipDetails} />;
 };
 
 export default StarshipPage;
