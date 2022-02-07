@@ -1,3 +1,4 @@
 import StarshipPage from './StarshipPage';
+import StarshipDetails from './StarshipDetails';
 
-export default StarshipPage;
+export { StarshipPage, StarshipDetails };

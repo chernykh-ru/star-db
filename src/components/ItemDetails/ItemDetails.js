@@ -61,7 +61,7 @@ const ItemView = ({ item, image, children }) => {
         className='item-image'
         src={image}
         // src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
-        alt='placeholder'
+        alt='Sorry, the icon is lost.'
       />
       <div className='card-body'>
         <h4>{name}</h4>

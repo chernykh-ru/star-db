@@ -19,6 +19,7 @@ const StarshipDetails = ({ selectedStarship }) => {
   const { getStarship, getStarshipImage } = swapi;
   return (
     <ErrorBoundry>
+      {/* {selectedStarship && <div>{selectedStarship}</div>} */}
       {selectedStarship && (
         <ItemDetails itemId={selectedStarship} getData={getStarship} getImageUrl={getStarshipImage}>
           <Record field='model' label='Model' />

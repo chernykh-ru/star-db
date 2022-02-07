@@ -7,7 +7,7 @@ import PeoplePage from '../PeoplePage/PeoplePage';
 import ErrorBoundry from '../ErrorBoundry';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
 import PlanetPage from '../PlanetPage';
-import StarshipPage from '../StarshipPage';
+import StarshipPage from '../StarshipPage/StarshipPage';
 import { Routes, Route, Outlet, Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 // import ItemList from '../ItemList';
@@ -17,12 +17,13 @@ import StarshipDetails from '../StarshipPage/StarshipDetails';
 
 function App() {
   const [state, setState] = useState({
-    // showRandomPlanet: true,
     swapi: new SwapiService(),
   });
 
-  let { id } = useParams();
-  console.log('params', id);
+  // let { id } = useParams();
+  // console.log('params from App', id);
+  // let params = useParams();
+  // console.log('params from App', params);
 
   let location = useLocation();
   console.log('location', location);
@@ -34,19 +35,15 @@ function App() {
 
   const { swapi } = state;
 
-  // const extractId = () => {
-  //   const _idRegExp = /\/([0-9]*)$/;
-  //   if (location) {
-  //     return location.pathname.match(_idRegExp)[1];
-  //   }
-  // };
+  const extractId = () => {
+    const _idRegExp = /\/([0-9]*)$/;
+    if (location.pathname.match(_idRegExp)) {
+      return location.pathname.match(_idRegExp)[1];
+    }
+  };
+  const starshipId = extractId();
   // console.log(extractId());
-
-  // const onToggleRandom = () => {
-  //   setState(({ showRandomPlanet }) => {
-  //     return { ...state, showRandomPlanet: !showRandomPlanet };
-  //   });
-  // };
+  // console.log(starshipId);
 
   const onChangeService = () => {
     setState(({ swapi }) => {
@@ -59,31 +56,22 @@ function App() {
     <div className='container'>
       <Header onChangeService={onChangeService} />
       <RandomPlanet />
-      {/* {showRandomPlanet && <RandomPlanet />} */}
-      {/* <ToggleRandomPlanet onToggleRandom={onToggleRandom} /> */}
       <SwapiServiceContext.Provider value={swapi}>
         <Routes>
-          <Route exact path='/' element={<h2>Welcome to Star DB</h2>} />
+          {/* <Route exact path='/' element={<h2>Welcome to Star DB</h2>} /> */}
           {/* <Route path='people' element={<PeoplePage />} />
           <Route path='planet' element={<PlanetPage />} /> */}
           <Route exact path='starship' element={<StarshipPage />} />
-          <Route path='starship/:id' element={<StarshipDetails selectedStarship={10} />} />
-          {/* <Route path='starship/:id' element={<h2>Hi ships</h2>} /> */}
+          <Route path='starship/:id' element={<StarshipDetails selectedStarship={starshipId} />} />
+
+          {/* <Route path='starship' element={<StarshipPage />}>
+            <Route path=':id' element={<StarshipDetails selectedStarship={starshipId} />} />
+          </Route> */}
         </Routes>
       </SwapiServiceContext.Provider>
       <Outlet />
     </div>
   );
 }
-
-// const ToggleRandomPlanet = ({ onToggleRandom }) => {
-//   return (
-//     <div>
-//       <button className='toggle-planet btn btn-warning btn-lg' onClick={onToggleRandom}>
-//         Toggle Random Planet
-//       </button>
-//     </div>
-//   );
-// };
 
 export default App;
