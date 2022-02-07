@@ -68,20 +68,6 @@ RandomPlanet.propTypes = {
   updateInterval: PropTypes.number,
 };
 
-// RandomPlanet.propTypes = {
-//   updateInterval: (props, propName, componentName) => {
-//     const value = props[propName];
-
-//     if (typeof value === 'number' && !isNaN(value)) {
-//       return null;
-//     }
-//     return new TypeError(`${componentName}: ${propName} must be number `);
-//   },
-// };
-// RandomPlanet.defaultProps = {
-//   updateInterval: 60000,
-// };
-
 const PlanetView = ({ planet }) => {
   const { id, population, rotationPeriod, diameter, name } = planet;
   return (
@@ -96,15 +82,12 @@ const PlanetView = ({ planet }) => {
         <ul className='list-group list-group-flush'>
           <li className='list-group-item'>
             <span className='term'>Population: {population} residents</span>
-            {/* <span>{population}</span> */}
           </li>
           <li className='list-group-item'>
             <span className='term'>Rotation period of {rotationPeriod} hours</span>
-            {/* <span>{rotationPeriod}</span> */}
           </li>
           <li className='list-group-item'>
             <span className='term'>Diameter: {diameter} km</span>
-            {/* <span>{diameter}</span> */}
           </li>
         </ul>
       </div>

@@ -16,6 +16,7 @@
 }
 
 .nav-link {
+  padding: .5rem;
   text-decoration: none;
 }
 
@@ -49,7 +50,8 @@
 } */
 
 .header button {
-  height: 2.2rem;
+  /* min-height: 2.2rem; */
   margin-top: 10px;
   margin-left: 20px;
+  margin-bottom: 1.6rem;
 }

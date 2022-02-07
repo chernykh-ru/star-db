@@ -13,20 +13,6 @@ const StarshipPage = () => {
 
   const swapi = useContext(SwapiServiceContext);
 
-  // let location = useLocation();
-  // console.log('location', location);
-  // let { id } = useParams();
-  // console.log('params from SP', id);
-
-  // useEffect(() => {
-  //   getStarshipId(id);
-
-  //   return () => {
-  //     getStarshipId(id);
-  //   };
-  // }, [id]);
-
-  // const { selectedStarship } = state;
   const { getAllStarships } = swapi;
 
   // const onStarshipSelected = (id) => {

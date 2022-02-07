@@ -31,7 +31,6 @@ const PeoplePage = ({ selectedPerson }) => {
       // left={<PeopleList getData={getAllPeople} />}
       right={
         <PersonDetails
-          // path='people/:id'
           selectedPerson={selectedPerson}
           getPerson={getPerson}
           getPersonImage={getPersonImage}

@@ -27,6 +27,16 @@ const Header = ({ onChangeService }) => {
             Starships
           </NavLink>
         </li>
+        <li>
+          <Link to='/login/' className='nav-link'>
+            Login
+          </Link>
+        </li>
+        <li>
+          <Link to='/secret/' className='nav-link'>
+            Secret
+          </Link>
+        </li>
       </ul>
       <button className='btn btn-primary btn-sm' onClick={onChangeService}>
         Change API Service

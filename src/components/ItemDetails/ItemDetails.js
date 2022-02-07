@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import SwapiService from '../../services/SwapiService';
 import Spinner from '../Spinner';
 import ErrorIndicator from '../ErrorIndicator';
 import ErrorButton from '../ErrorButton';
-
 import './ItemDetails.css';
-
-const swapi = new SwapiService();
 
 export const Record = ({ item, field, label }) => {
   return (
     <li className='list-group-item'>
       <span className='term'>{label}</span>
-      {/* <span>{field}</span> */}
       <span>{item[field]}</span>
     </li>
   );
@@ -23,12 +18,7 @@ const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
 
   const { item, image, loading, error } = state;
 
-  // console.log('person ditails state', state);
-  // console.log('person ditails selectedPerson', selectedPerson);
-
   const onItemLoaded = (item) => {
-    // console.log('onPersonLoaded', person);
-
     setState({ item, image: getImageUrl(item), loading: false });
   };
 
@@ -39,7 +29,6 @@ const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
 
   useEffect(() => {
     getData(itemId).then(onItemLoaded).catch(onError);
-    // swapi.getPerson(itemId).then(onItemLoaded).catch(onError);
   }, [itemId]);
 
   const hasData = !(loading || error);
@@ -69,16 +58,6 @@ const ItemView = ({ item, image, children }) => {
           {React.Children.map(children, (child) => {
             return React.cloneElement(child, { item });
           })}
-          {/* {children} */}
-          {/* <li className='list-group-item'>
-            <span className='term'>Gender: {gender}</span>
-          </li>
-          <li className='list-group-item'>
-            <span className='term'>Birth Year: {birthYear}</span>
-          </li>
-          <li className='list-group-item'>
-            <span className='term'>Eye Color: {eyeColor}</span>
-          </li> */}
         </ul>
         <div className='throw-error'>
           <ErrorButton />

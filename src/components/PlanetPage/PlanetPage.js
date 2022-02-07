@@ -23,12 +23,6 @@ const PlanetPage = ({ selectedPlanet }) => {
   // };
 
   const planetList = <ItemList getData={getAllPlanets} />;
-  // const itemList = (
-  //   <ItemList onItemSelected={onPersonSelected} getData={swapi.getAllPeople}>
-  //     {/* renderItem={({ name, gender, birthYear }) => `${name} (${gender} ${birthYear})`}> */}
-  //     {(i) => `${i.name} (${i.birthYear})`}
-  //   </ItemList>
-  // );
 
   const planetDetails = (
     <ErrorBoundry>

@@ -1,10 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import ErrorBoundry from '../ErrorBoundry';
-import ItemDetails from '../ItemDetails';
-import Row from '../Row';
-import { Record } from '../ItemDetails/ItemDetails';
-import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Spinner from '../Spinner/Spinner';
 
 const ItemList = ({ getData }) => {
@@ -19,16 +14,12 @@ const ItemList = ({ getData }) => {
       .then((data) =>
         setState(({ itemList }) => {
           return { ...state, itemList: [...data] };
-          // return { ...state, people: [...people, ...data] };
         }),
       )
       .catch((err) => {
         console.error('Could not fetch', err);
       });
-    // swapi.getPerson(3).then((p) => {
-    //   // console.log(p.name);
-    // });
-  }, []); //!!!
+  }, []);
 
   let navigate = useNavigate();
 
@@ -41,8 +32,6 @@ const ItemList = ({ getData }) => {
       <ul className='item-list list-group'>
         {itemList.map((item) => {
           const { id } = item;
-          // const label = children(item);
-          // const label = renderItem(item);
           return (
             <li
               className='list-group-item'
