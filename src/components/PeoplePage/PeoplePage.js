@@ -6,49 +6,39 @@ import Row from '../Row';
 import './PeoplePage.css';
 import { Record } from '../ItemDetails/ItemDetails';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
+import PersonDetails from './PersonDetails';
+import PeopleList from './PeopleListOld';
+import { Route, Routes } from 'react-router-dom';
 
-const PeoplePage = () => {
-  const [state, setState] = useState({
-    selectedPerson: null,
-  });
+const PeoplePage = ({ selectedPerson }) => {
+  // const [state, setState] = useState({
+  //   selectedPerson: null,
+  // });
 
   const swapi = useContext(SwapiServiceContext);
 
-  const { selectedPerson } = state;
+  // const { selectedPerson } = state;
+  const { getPerson, getPersonImage, getAllPeople } = swapi;
 
-  const onPersonSelected = (id) => {
-    setState({ ...state, selectedPerson: id });
-    // console.log('person id', id);
-  };
+  // const onPersonSelected = (id) => {
+  //   setState({ ...state, selectedPerson: id });
+  //   // console.log('person id', id);
+  // };
 
-  const peopleList = (
-    <ItemList getData={swapi.getAllPeople} onItemSelected={onPersonSelected}>
-      {({ name }) => <span>{name}</span>}
-    </ItemList>
+  return (
+    <Row
+      left={<ItemList getData={getAllPeople} />}
+      // left={<PeopleList getData={getAllPeople} />}
+      right={
+        <PersonDetails
+          // path='people/:id'
+          selectedPerson={selectedPerson}
+          getPerson={getPerson}
+          getPersonImage={getPersonImage}
+        />
+      }
+    />
   );
-  // const itemList = (
-  //   <ItemList onItemSelected={onPersonSelected} getData={swapi.getAllPeople}>
-  //     {/* renderItem={({ name, gender, birthYear }) => `${name} (${gender} ${birthYear})`}> */}
-  //     {(i) => `${i.name} (${i.birthYear})`}
-  //   </ItemList>
-  // );
-
-  const personDetails = (
-    <ErrorBoundry>
-      {selectedPerson && (
-        <ItemDetails
-          itemId={selectedPerson}
-          getData={swapi.getPerson}
-          getImageUrl={swapi.getPersonImage}>
-          <Record field='gender' label='Gender' />
-          <Record field='eyeColor' label='Eye Color' />
-          <Record field='birthYear' label='Birth Year' />
-        </ItemDetails>
-      )}
-    </ErrorBoundry>
-  );
-
-  return <Row left={peopleList} right={personDetails} />;
 };
 
 export default PeoplePage;

@@ -1,18 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
-import ErrorBoundry from '../ErrorBoundry';
-import ItemDetails from '../ItemDetails';
-import Row from '../Row';
-import { Record } from '../ItemDetails/ItemDetails';
-import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
-import { Link, useNavigate } from 'react-router-dom';
-import Spinner from '../Spinner/Spinner';
+import React, { useState, useEffect } from 'react';
+import Spinner from '../Spinner';
+import PropTypes from 'prop-types';
+import './ItemList.css';
 
-const ItemList = ({ getData }) => {
+const ItemList = ({ onItemSelected, getData, renderItem, children }) => {
   const [state, setState] = useState({
     itemList: [],
   });
 
   const { itemList } = state;
+
+  console.log('state ItemList', state);
 
   useEffect(() => {
     getData()
@@ -28,9 +26,7 @@ const ItemList = ({ getData }) => {
     // swapi.getPerson(3).then((p) => {
     //   // console.log(p.name);
     // });
-  }, []); //!!!
-
-  let navigate = useNavigate();
+  }, [getData]);
 
   if (!itemList) {
     return <Spinner />;
@@ -41,22 +37,23 @@ const ItemList = ({ getData }) => {
       <ul className='item-list list-group'>
         {itemList.map((item) => {
           const { id } = item;
-          // const label = children(item);
+          const label = children(item);
           // const label = renderItem(item);
           return (
-            <li
-              className='list-group-item'
-              key={id}
-              onClick={() => {
-                navigate(`${id}`);
-              }}>
-              <p>{item.name}</p>
+            <li className='list-group-item' key={id} onClick={() => onItemSelected(id)}>
+              <p>{label}</p>
             </li>
           );
         })}
       </ul>
     </div>
   );
+};
+
+ItemList.propTypes = {
+  onItemSelected: PropTypes.func.isRequired,
+  getData: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired,
 };
 
 export default ItemList;

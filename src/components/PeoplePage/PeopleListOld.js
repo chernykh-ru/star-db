@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ErrorBoundry from '../ErrorBoundry';
+import ItemList from '../ItemList';
 import ItemDetails from '../ItemDetails';
 import Row from '../Row';
+import './PeoplePage.css';
 import { Record } from '../ItemDetails/ItemDetails';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
+import PersonDetails from './PersonDetails';
 import { Link, useNavigate } from 'react-router-dom';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../Spinner';
 
-const ItemList = ({ getData }) => {
+const PeopleList = ({ getData }) => {
   const [state, setState] = useState({
     itemList: [],
   });
@@ -52,11 +55,11 @@ const ItemList = ({ getData }) => {
               }}>
               <p>{item.name}</p>
             </li>
-          );
+          ); 
         })}
       </ul>
     </div>
   );
 };
 
-export default ItemList;
+export default PeopleList;

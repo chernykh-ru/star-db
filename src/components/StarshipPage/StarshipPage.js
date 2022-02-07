@@ -3,7 +3,7 @@ import ItemList from '../ItemList';
 import { useLocation, useParams, Outlet, Route, Routes } from 'react-router-dom';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
 import './StarshipPage.css';
-import StarshipList from './StarshipList';
+import StarshipList from './StarshipListOld';
 import StarshipDetails from './StarshipDetails';
 
 const StarshipPage = () => {
@@ -35,14 +35,16 @@ const StarshipPage = () => {
   // };
 
   return (
-    <>
-      <StarshipList getData={getAllStarships} />
-      {/* <Routes>
-        <Route path=':id' element={<StarshipDetails selectedStarship={10} />} />
-      </Routes> */}
+    <ItemList getData={getAllStarships} />
 
-      {/* <Outlet /> */}
-    </>
+    // <>
+    //   <StarshipList getData={getAllStarships} />
+    //   {/* <Routes>
+    //     <Route path=':id' element={<StarshipDetails selectedStarship={10} />} />
+    //   </Routes> */}
+
+    //   {/* <Outlet /> */}
+    // </>
   );
 };
 

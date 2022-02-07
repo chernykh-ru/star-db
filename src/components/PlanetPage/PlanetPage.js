@@ -7,25 +7,22 @@ import { Record } from '../ItemDetails/ItemDetails';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
 import './PlanetPage.css';
 
-const PlanetPage = () => {
-  const [state, setState] = useState({
-    selectedPlanet: null,
-  });
+const PlanetPage = ({ selectedPlanet }) => {
+  // const [state, setState] = useState({
+  //   selectedPlanet: null,
+  // });
 
   const swapi = useContext(SwapiServiceContext);
+  const { getPlanet, getPlanetImage, getAllPlanets } = swapi;
 
-  const { selectedPlanet } = state;
+  // const { selectedPlanet } = state;
 
-  const onPlanetSelected = (id) => {
-    setState({ ...state, selectedPlanet: id });
-    // console.log('person id', id);
-  };
+  // const onPlanetSelected = (id) => {
+  //   setState({ ...state, selectedPlanet: id });
+  //   // console.log('person id', id);
+  // };
 
-  const planetList = (
-    <ItemList getData={swapi.getAllPlanets} onItemSelected={onPlanetSelected}>
-      {({ name }) => <span>{name}</span>}
-    </ItemList>
-  );
+  const planetList = <ItemList getData={getAllPlanets} />;
   // const itemList = (
   //   <ItemList onItemSelected={onPersonSelected} getData={swapi.getAllPeople}>
   //     {/* renderItem={({ name, gender, birthYear }) => `${name} (${gender} ${birthYear})`}> */}
@@ -36,10 +33,7 @@ const PlanetPage = () => {
   const planetDetails = (
     <ErrorBoundry>
       {selectedPlanet && (
-        <ItemDetails
-          itemId={selectedPlanet}
-          getData={swapi.getPlanet}
-          getImageUrl={swapi.getPlanetImage}>
+        <ItemDetails itemId={selectedPlanet} getData={getPlanet} getImageUrl={getPlanetImage}>
           <Record field='population' label='Population' />
           <Record field='rotationPeriod' label='Rotation Period' />
           <Record field='diameter' label='Diameter' />

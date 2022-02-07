@@ -6,7 +6,7 @@ import RandomPlanet from '../RandomPlanet';
 import PeoplePage from '../PeoplePage/PeoplePage';
 import ErrorBoundry from '../ErrorBoundry';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
-import PlanetPage from '../PlanetPage';
+import PlanetPage from '../PlanetPage/PlanetPage';
 import StarshipPage from '../StarshipPage/StarshipPage';
 import { Routes, Route, Outlet, Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
@@ -41,7 +41,7 @@ function App() {
       return location.pathname.match(_idRegExp)[1];
     }
   };
-  const starshipId = extractId();
+  const selectedId = extractId();
   // console.log(extractId());
   // console.log(starshipId);
 
@@ -58,11 +58,12 @@ function App() {
       <RandomPlanet />
       <SwapiServiceContext.Provider value={swapi}>
         <Routes>
-          {/* <Route exact path='/' element={<h2>Welcome to Star DB</h2>} /> */}
-          {/* <Route path='people' element={<PeoplePage />} />
-          <Route path='planet' element={<PlanetPage />} /> */}
+          <Route path='people/*' element={<PeoplePage selectedPerson={selectedId} />} />
+
+          <Route path='planets/*' element={<PlanetPage selectedPlanet={selectedId} />} />
+
           <Route path='starships/*' element={<StarshipPage />} />
-          <Route path='starships/:id' element={<StarshipDetails selectedStarship={starshipId} />} />
+          <Route path='starships/:id' element={<StarshipDetails selectedStarship={selectedId} />} />
 
           {/* <Route path='starship/*' element={<StarshipPage />}>
             <Route path=':id' element={<StarshipDetails selectedStarship={starshipId} />} />
