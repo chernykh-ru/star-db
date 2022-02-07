@@ -61,15 +61,15 @@ function App() {
           {/* <Route exact path='/' element={<h2>Welcome to Star DB</h2>} /> */}
           {/* <Route path='people' element={<PeoplePage />} />
           <Route path='planet' element={<PlanetPage />} /> */}
-          <Route exact path='starship' element={<StarshipPage />} />
-          <Route path='starship/:id' element={<StarshipDetails selectedStarship={starshipId} />} />
+          <Route path='starships/*' element={<StarshipPage />} />
+          <Route path='starships/:id' element={<StarshipDetails selectedStarship={starshipId} />} />
 
-          {/* <Route path='starship' element={<StarshipPage />}>
+          {/* <Route path='starship/*' element={<StarshipPage />}>
             <Route path=':id' element={<StarshipDetails selectedStarship={starshipId} />} />
           </Route> */}
         </Routes>
       </SwapiServiceContext.Provider>
-      <Outlet />
+      {/* <Outlet /> */}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 
 import './Header.css';
 
@@ -13,19 +13,19 @@ const Header = ({ onChangeService }) => {
       </h3>
       <ul className='d-flex'>
         <li>
-          <Link to='/people' className='nav-link'>
+          <Link to='/people/' className='nav-link'>
             People
           </Link>
         </li>
         <li>
-          <Link to='/planet' className='nav-link'>
+          <Link to='/planets/' className='nav-link'>
             Planets
           </Link>
         </li>
         <li>
-          <Link to='/starship' className='nav-link'>
+          <NavLink to='/starships/' end className='nav-link'>
             Starships
-          </Link>
+          </NavLink>
         </li>
       </ul>
       <button className='btn btn-primary btn-sm' onClick={onChangeService}>

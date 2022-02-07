@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ItemList from '../ItemList';
-import { useLocation, useParams, Outlet } from 'react-router-dom';
+import { useLocation, useParams, Outlet, Route, Routes } from 'react-router-dom';
 import SwapiServiceContext from '../SwapiServiceContext/SwapiServiceContext';
 import './StarshipPage.css';
 import StarshipList from './StarshipList';
@@ -37,10 +37,12 @@ const StarshipPage = () => {
   return (
     <>
       <StarshipList getData={getAllStarships} />
-      {/* <StarshipDetails selectedStarship={id} /> */}
+      {/* <Routes>
+        <Route path=':id' element={<StarshipDetails selectedStarship={10} />} />
+      </Routes> */}
+
       {/* <Outlet /> */}
     </>
-    // <StarshipList getData={getAllStarships} onStarshipSelected={parseInt(params.id, 10)} />
   );
 };
 

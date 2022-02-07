@@ -57,7 +57,7 @@ const StarshipList = ({ getData }) => {
               className='list-group-item'
               key={id}
               onClick={() => {
-                navigate(`/starship/${id}`);
+                navigate(`${id}`);
               }}>
               <p>{item.name}</p>
               {/* <Link to={`/starship/${id}`}>{label}</Link> */}
