@@ -4,7 +4,7 @@ import Spinner from '../Spinner/Spinner';
 
 const ItemList = ({ getData }) => {
   const [state, setState] = useState({
-    itemList: [],
+    itemList: null,
   });
 
   const { itemList } = state;
@@ -24,7 +24,11 @@ const ItemList = ({ getData }) => {
   let navigate = useNavigate();
 
   if (!itemList) {
-    return <Spinner />;
+    return (
+      <div className='item-list list-group'>
+        <Spinner />
+      </div>
+    );
   }
 
   return (

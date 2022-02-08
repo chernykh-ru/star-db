@@ -71,7 +71,7 @@ function App() {
             <Route path=':id' element={<StarshipDetails selectedStarship={starshipId} />} />
           </Route> */}
 
-          <Route path='*' element={<LoginPage to='login' />} />
+          {/* <Route path='*' element={<LoginPage to='login' />} /> */}
         </Routes>
       </SwapiServiceContext.Provider>
       {/* <Outlet /> */}
